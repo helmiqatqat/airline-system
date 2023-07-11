@@ -2,7 +2,7 @@
 
 ## Archeticture
 
-![design](./images/Design.png)
+![design](./images/Arch.png)
 
 ## Output:
 ![output](./images/Output.png)
