@@ -1,7 +1,7 @@
-const flightEvent = require('./events');
+const flightEvent = require('./src/events');
 const { faker } = require('@faker-js/faker')
-const FlightDetails = require('./system')
-require('./pilot')
+const FlightDetails = require('./src/system')
+require('./src/pilot')
 
 
 const newFlight = () => {
