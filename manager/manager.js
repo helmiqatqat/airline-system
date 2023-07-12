@@ -1,7 +1,7 @@
-const flightEvent = require('./src/events');
+require('dotenv').config()
 const { faker } = require('@faker-js/faker')
-const FlightDetails = require('./src/system')
-require('./src/pilot')
+const io = require('socket.io-client')
+const socket = io.connect(`http://localhost:${process.env.PORT}`)
 
 
 const newFlight = () => {
@@ -12,14 +12,16 @@ const newFlight = () => {
         pilot: faker.internet.userName(),
         destination: faker.location.country()
     }
-    console.log(`Manager: flight with id of ${payload.flightID}, has been scheduled`)
-    flightEvent.emit('new-flight', payload)
-    FlightDetails(payload)
+    socket.emit('new-flight', payload)
 }
 
 setInterval(newFlight, 10000)
 
-flightEvent.on('Arrived', (payload) => {
-    FlightDetails(payload)
+
+socket.on('new-flight', (payload) => {
+    console.log(`Manager: flight with id of ${payload.flightID}, has been scheduled`)
+})
+
+socket.on('Arrived', (payload) => {
     console.log(`Manager: Well done pilot ${payload.pilot}`)
 })
