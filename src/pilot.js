@@ -1,17 +1,17 @@
 const flightEvent = require('./events');
-const FlightDetails = require('./system')
 
-flightEvent.on('new-flight', (payload) => {
+flightEvent.on('new-flight-pilot', (payload) => {
     setTimeout(() => {
         payload.event = 'took-off'
-        flightEvent.emit('took-off', payload)
         console.log(`Pilot: plane of flight id ${payload.flightID} has taken off`)
-        FlightDetails(payload)
+        flightEvent.emit('took-off-manager', payload)
+        flightEvent.emit('took-off-system', payload)
     }, 4000)
 
     setTimeout(() => {
         payload.event = 'Arrived'
         console.log(`Pilot: plane of flight id ${payload.flightID} arrived`)
-        flightEvent.emit('Arrived', payload)
+        flightEvent.emit('arrived-system', payload)
+        flightEvent.emit('arrived-manager', payload)
     }, 7000)
 })

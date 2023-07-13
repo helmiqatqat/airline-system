@@ -1,8 +1,5 @@
-const flightEvent = require('./src/events');
+const flightEvent = require('./events');
 const { faker } = require('@faker-js/faker')
-const FlightDetails = require('./src/system')
-require('./src/pilot')
-
 
 const newFlight = () => {
     const payload = {
@@ -13,13 +10,13 @@ const newFlight = () => {
         destination: faker.location.country()
     }
     console.log(`Manager: flight with id of ${payload.flightID}, has been scheduled`)
-    flightEvent.emit('new-flight', payload)
-    FlightDetails(payload)
+    flightEvent.emit('new-flight-pilot', payload)
+    flightEvent.emit('new-flight-system', payload)
 }
 
 setInterval(newFlight, 10000)
 
-flightEvent.on('Arrived', (payload) => {
-    FlightDetails(payload)
+flightEvent.on('arrived-manager', (payload) => {
     console.log(`Manager: Well done pilot ${payload.pilot}`)
+    console.log(`#########################################`)
 })

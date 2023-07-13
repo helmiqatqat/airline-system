@@ -1,16 +1,6 @@
-const FlightDetails = (payload) => {
-    const object = {
-        event: payload.event,
-        time: new Date().toString(),
-        Details: {
-            airline: payload.airline,
-            destination: payload.destination,
-            pilot: payload.pilot,
-            flightID: payload.flightID
-        }
-    }
-    console.log(`Flight `, object)
-    console.log(`#####################################`)
-}
+const flightEvent = require('./events');
+const logFlightDetails = require('./logger')
 
-module.exports = FlightDetails
+flightEvent.on('new-flight-system', (payload) => logFlightDetails(payload))
+flightEvent.on('took-off-system', (payload) => logFlightDetails(payload))
+flightEvent.on('arrived-system', (payload) => logFlightDetails(payload))
