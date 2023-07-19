@@ -1,8 +1,13 @@
 # airline-system
 
+## Message Queue Socket.io Output
+
+![Message Queue](./images/msgQueue.png)
+
 ## Archeticture
 
 ![design](./images/Arch.png)
 
-## Output:
-![output](./images/Output.png)
+## Event branch output
+
+![output](./images/event.png)

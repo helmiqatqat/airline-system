@@ -2,6 +2,14 @@ require('dotenv').config()
 const io = require('socket.io-client')
 const socket = io.connect(`http://localhost:${process.env.PORT}`)
 
+socket.emit('get-all')
+
+socket.on('flight', (payload) => {
+    for(let flight in payload) {
+        console.log(`Pilot: Sorry I did not catch this flight with ID: ${flight}`)
+    }
+})
+
 socket.on('new-flight', (payload) => {
     setTimeout( () => {
         payload.event = 'took-off'
