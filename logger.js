@@ -9,8 +9,7 @@ const FlightDetails = (payload) => {
             flightID: payload.flightID
         }
     }
-    console.log(`Flight `, object)
-    console.log(`#####################################`)
+    return object
 }
 
 module.exports = FlightDetails
